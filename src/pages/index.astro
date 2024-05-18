@@ -1,0 +1,80 @@
+---
+import ContactForm from "../components/ContactForm.astro";
+import FallingLeaves from "../components/FallingLeaves.astro";
+import ProjectItem from "../components/ProjectItem.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const experiences = await getCollection("experiences");
+---
+
+<Layout title="Salomon C.">
+	<FallingLeaves />
+	<div class="grid gap-2">
+		<div class="flex gap-4 items-center col-span-full">
+			<h2 class="font-bold text-lg shrink-0">Introduction</h2>
+			<div class="h-px w-full border-b border-gray-300"></div>
+		</div>
+		<p class="text-slate-600">
+			I'm a full-stack web developer with 4 years of experience. I've worked on
+			a variety of projects using modern technologies, especially React JS.
+			<br /><br />
+			 My foundation in programming logic, design, and data systems is strong.
+			I'm well-prepared to adapt to various environments in a versatile manner.
+			I'm also great at communicating, taking the initiative, and being willing
+			to learn. I'm always excited to expand my knowledge and work experience.
+		</p>
+	</div>
+	<div class="grid gap-2 sm:grid-cols-2">
+		<div class="flex gap-4 items-center col-span-full">
+			<h2 class="font-bold text-lg shrink-0">Projects</h2>
+			<div class="h-px w-full border-b border-gray-300"></div>
+		</div>
+
+		<div
+			class={`relative rounded-lg   p-3  flex flex-col lg:transition-[background-color,border-color] lg:duration-300]  `}>
+			<p class="font-bold">This website</p>
+			<p class={`text-sm text-slate-600`}>
+				A portfolio site made using Astro.build
+			</p>
+		</div>
+		<ProjectItem
+			name="Warventure"
+			image="/warventure.png"
+			href="https://warventure.com"
+			description="A turn-based strategy game"
+		/>
+		<ProjectItem
+			name="Intelliconnex"
+			image="/intelliconnex.png"
+			href="https://intelliconnex.salomond.com/"
+			description="A landing page with blog integration"
+		/>
+	</div>
+	<div class="grid gap-2 sm:grid-cols-2">
+		<div class="flex gap-4 items-center col-span-full">
+			<h2 class="font-bold text-lg shrink-0">Work Experience</h2>
+			<div class="h-px w-full border-b border-gray-300"></div>
+		</div>
+
+		{
+			experiences
+				.sort((a, b) => a.data.order - b.data.order)
+				.map((xp) => (
+					<ProjectItem
+						name={xp.data.name}
+						description={xp.data.role}
+						image={xp.data.background.src}
+						href={`/xp/${xp.slug}`}
+					/>
+				))
+		}
+	</div>
+	<div class="grid gap-2 sm:grid-cols-2">
+		<div class="flex gap-4 items-center col-span-full">
+			<h2 class="font-bold text-lg shrink-0">Contact</h2>
+			<div class="h-px w-full border-b border-gray-300"></div>
+		</div>
+		<ContactForm />
+	</div>
+</Layout>

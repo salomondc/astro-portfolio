@@ -1,0 +1,61 @@
+---
+import Svg from "../../lib/Svg.astro";
+import Container from "./Container.astro";
+import MenuItem from "./MenuItem.astro";
+---
+
+<div
+	id="menu"
+	class="relative z-50">
+	<button
+		aria-label="hamburger-menu"
+		onclick="document.querySelector('#close-menu').focus();"
+		class="hover:bg-[#F0EEFD] hover:shadow-inner duration-300 transition-[background-color] px-1.5 -mx-1.5 pt-1.5 -mt-1.5 rounded">
+		<Svg name="hamburger-menu" />
+	</button>
+
+	<Container>
+		<button
+			id="close-menu"
+			class="text-slate-400 bg-purple-50 flex items-center gap-2 px-4 py-2 mb-2 w-fit pointer-events-none group-focus-within:pointer-events-auto hover:text-slate-600"
+			onclick="document.querySelector('#open-mail').focus();">
+			<Svg name="close" />Menu</button
+		>
+		{
+			[
+				{
+					href: "https://www.linkedin.com/in/salomoncastillo/",
+					icon: "linkedin",
+					name: "Linkedin",
+				},
+
+				{
+					href: "https://github.com/salomondc",
+					icon: "github",
+					name: "Github",
+				},
+
+				{ divider: true },
+
+				{ href: "/salomon-cv.pdf", icon: "download", name: "Curriculum" },
+
+				{
+					href: "mailto:salomondc8@gmail.com",
+					icon: "email-filled",
+					name: "Contact",
+				},
+			].map((item, i) =>
+				item.divider ? (
+					<div class="h-px lg:hidden w-4/5 my-2 mx-auto bg-slate-300" />
+				) : (
+					<MenuItem
+						order={i + 1}
+						href={item.href!}
+						icon={item.icon!}
+						name={item.name!}
+					/>
+				)
+			)
+		}
+	</Container>
+</div>

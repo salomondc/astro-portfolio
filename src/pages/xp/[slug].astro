@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+export const getStaticPaths = async () => {
+	const experiences = await getCollection("experiences");
+
+	const paths = experiences.map((xp) => ({
+		params: { slug: xp.slug },
+		props: { xp },
+	}));
+
+	return paths;
+};
+
+interface Props {
+	xp: CollectionEntry<"experiences">;
+}
+
+const { xp } = Astro.props;
+const { Content } = await xp.render();
+---
+
+<Layout title={`@ ${xp.data.name}`}>
+	<div class="mx-auto w-fit">
+		<div class={`items-center flex-row border-dashed text-sm flex gap-2`}>
+			<a
+				target="_blank"
+				href={xp.data.url}>
+				<Image
+					src={xp.data.image}
+					alt="my-face"
+					width={160}
+					height={160}
+					class={"rounded-full w-24"}
+				/></a
+			>
+			<div class="flex flex-col items-start">
+				<a
+					target="_blank"
+					href={xp.data.url}
+					><h1
+						id="me"
+						class="font-bold text-lg hover:underline">
+						{xp.data.name}
+					</h1></a
+				>
+				<span class="text-slate-600">{xp.data.period}</span>
+				<span class="text-slate-600">{xp.data.role}</span>
+			</div>
+		</div>
+	</div>
+	<div class="prose lg:prose-lg lg:text-left px-4 mx-auto max-w-2xl mt-4">
+		<Content />
+	</div>
+</Layout>

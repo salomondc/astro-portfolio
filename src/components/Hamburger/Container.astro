@@ -1,0 +1,20 @@
+---
+
+---
+
+<div
+	class="opacity-0 group delay-[1s] focus-within:delay-0 focus-within:opacity-100">
+	<div
+		onclick="document.querySelector('#open-mail').focus();"
+		class="absolute lg:hidden -top-4 -left-4 w-screen h-screen group-focus-within:bg-black/10 bg-transparent transition-colors duration-500 group-focus-within:pointer-events-auto pointer-events-none">
+	</div>
+	<div
+		class="absolute z-50 top-0 group-focus-within:translate-x-0 -translate-x-full lg:translate-x-0 lg:delay-[0.7s] lg:group-focus-within:delay-0 lg:-translate-y-full lg:group-focus-within:translate-y-0 transition-transform duration-500 lg:duration-0 -m-4">
+		<div class="">
+			<div
+				class="flex flex-col lg:opacity-0 lg:group-focus-within:opacity-100 transition-opacity lg:duration-500 lg:delay-[0.3s] lg:group-focus-within:delay-0 h-screen lg:h-fit lg:shadow-none bg-purple-50 py-2 lg:pb-0 shadow-xl select-none">
+				<slot />
+			</div>
+		</div>
+	</div>
+</div>

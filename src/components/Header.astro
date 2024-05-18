@@ -1,0 +1,24 @@
+---
+import Svg from "../lib/Svg.astro";
+import Hamburger from "./Hamburger/Hamburger.astro";
+const { isHomepage } = Astro.props;
+---
+
+<header class="flex justify-between gap-6 z-30">
+	{isHomepage ? <button
+		class="opacity-0 focus:opacity-100 absolute translate-x-12 mt-1 text-sm underline"
+		id="skip-to-main"
+		onclick="document.querySelector('#current-job-link').focus()"
+		>Skip to main content</button
+	> :<></>}
+	<nav>
+		<Hamburger />
+	</nav>
+	<a
+		id="open-mail"
+		aria-label="open-mail"
+		class="hover:bg-[#F0EEFD] hover:shadow-inner duration-300 transition-[background-color] px-1.5 -mx-1.5 pt-1.5 -mt-1.5 rounded"
+		href="mailto:salomondc8@gmail.com">
+		<Svg name="email" />
+	</a>
+</header>

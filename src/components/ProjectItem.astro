@@ -1,0 +1,17 @@
+---
+const { name, description, href, image } = Astro.props;
+---
+
+<a
+	href={href}
+	target={href && href.includes("http") ? "_blank" : "_self"}
+	class={`proj-link relative rounded-lg   p-3  flex flex-col lg:transition-[background-color,border-color] lg:duration-300]  border hover:bg-black/40 hover:border-indigo-400 active:transition-none active:bg-black/50 bg-black/30 text-white`}>
+	<div
+		style=`background-image: url(${image})`
+		class="rounded-lg absolute top-0 left-0 w-full h-full -z-20 opacity-100 bg-cover">
+	</div>
+	<p class="font-bold">{name}</p>
+	<p class={`text-sm text-slate-100`}>
+		{description}
+	</p>
+</a>

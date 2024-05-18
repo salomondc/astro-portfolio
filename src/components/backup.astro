@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+function randomFromIntervalButSpread(min: number, max: number, steps: number) {
+	return new Array(steps)
+		.fill(0)
+		.map(
+			(_, i) =>
+				Math.random() * ((max - min) / steps + 1) +
+				(i * (max - min)) / steps +
+				min
+		)
+		.sort(() => 0.5 - Math.random());
+}
+const leafs = 20;
+const delays = randomFromIntervalButSpread(-3, 80, leafs).map((x) =>
+	x < 0 ? 0 : x
+);
+const spreads = randomFromIntervalButSpread(10, 90, leafs);
+const fallSpeed = 60;
+const shakeSpeed = 6;
+---
+
+<div class="overflow-hidden absolute top-0 left-0 w-screen -z-50 h-full">
+	{
+		Array(leafs)
+			.fill("")
+			.map((_, i) => {
+				const distance = Math.random();
+				return (
+					<div
+						class="leaf max-md:odd:hidden absolute -top-[10%] -z-50"
+						style={{
+							left: `${spreads[i]}%`,
+							animationDelay: `${delays[i]}s, ${Math.random() * 2.5}s`,
+							animationDuration: `${fallSpeed}s, ${shakeSpeed}s;`,
+							opacity: `${60 - distance * 30}%`,
+							width: `${35 - distance * 10}px`,
+						}}>
+						<Image
+							width={35}
+							height={35}
+							src={`/leaf${Math.round(Math.random())}.png`}
+							alt=""
+						/>
+					</div>
+				);
+			})
+	}
+</div>
+
+<style>
+	.leaf {
+		animation-name: snowflakes-fall, snowflakes-shake;
+		animation-timing-function: linear, ease-in-out;
+		animation-iteration-count: infinite, infinite;
+		animation-play-state: running, running;
+	}
+
+	@keyframes snowflakes-fall {
+		0% {
+			top: -10%;
+		}
+		100% {
+			top: 100%;
+		}
+	}
+	@keyframes snowflakes-shake {
+		0%,
+		100% {
+			transform: translateX(0) rotate(25deg);
+		}
+		50% {
+			transform: translateX(80px) rotate(-15deg);
+		}
+	}
+</style>
+
+<script>
+	const leaves = document.querySelectorAll<HTMLDivElement>("leaf");
+</script>
