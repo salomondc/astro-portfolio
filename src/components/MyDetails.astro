@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import MenuItem from "./Hamburger/MenuItem.astro";
-import Svg from "../lib/Svg.astro";
+import { Image } from 'astro:assets';
+import Svg from '../lib/Svg.astro';
 
 interface Props {
   mobileHidden?: boolean;
@@ -12,7 +11,7 @@ const { mobileHidden } = Astro.props;
 
 <div
   class={`flex-col shrink-0 items-center p-12 h-fit lg:border rounded-xl text-sm ${
-    mobileHidden ? "hidden lg:flex" : "flex"
+    mobileHidden ? 'hidden lg:flex' : 'flex'
   }`}
 >
   <Image
@@ -20,10 +19,10 @@ const { mobileHidden } = Astro.props;
     alt="my-face"
     width={150}
     height={150}
-    class={"rounded-xl mb-4"}
+    class={'rounded-xl mb-4'}
   />
   <h1 id="me" class="font-bold text-lg">Salomon Castillo</h1>
-  <span class="text-slate-600">Developer @ Cap Global</span>
+  <span class="text-slate-600">Developer @ Amplifire</span>
   <span class="text-slate-600">Buenos Aires, Argentina</span>
   <div class="flex gap-2 mt-4">
     <a href="https://github.com/salomondc" aria-label="github">
